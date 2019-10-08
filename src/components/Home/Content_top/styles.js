@@ -5,7 +5,7 @@ export const Container = styled.div`
     align-items:center;
     justify-content:space-between;
     flex-direction:column-reverse;
-    transform:${props => props.show ? "translateX(0)" : "translateX(-500px)"};
+    transform:${props => props.show ? "translateX(0)" : "translateX(500px)"};
     opacity:${props => props.show ? 1 : 0};
     transition: 0.5s linear;
     @media only screen and (min-width:768px) {
