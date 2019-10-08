@@ -1,0 +1,43 @@
+{
+  "name": "echat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server/index.js",
+  "scripts": {
+    "dev": "nodemon src/server/index",
+    "build": "next build src",
+    "start": "NODE_ENV=production node src/server/index",
+    "export": "next export"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jack830608/echat.git"
+  },
+  "author": "JackLin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jack830608/echat/issues"
+  },
+  "homepage": "https://github.com/jack830608/echat#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "body-parser": "^1.19.0",
+    "crypto": "^1.0.1",
+    "express": "^4.17.1",
+    "mailgun-js": "^0.22.0",
+    "mongoose": "^5.7.3",
+    "mongoose-lean-id": "^0.2.0",
+    "morgan": "^1.9.1",
+    "next": "^9.0.8",
+    "next-redux-wrapper": "^4.0.1",
+    "nprogress": "^0.2.0",
+    "path": "^0.12.7",
+    "qrcode": "^1.4.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-redux": "^7.1.1",
+    "redux": "^4.0.4",
+    "request": "^2.88.0",
+    "styled-components": "^4.4.0"
+  }
+}
