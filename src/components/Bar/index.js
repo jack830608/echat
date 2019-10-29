@@ -34,7 +34,7 @@ export default class extends React.Component {
                         <Img src={`${window.location.origin}/images/logo.png`} />
                     </Link>}
                 <RightPart>
-                    <Link href="/start">
+                    <Link href="/register">
                         <Button>免費註冊</Button>
                     </Link>
                 </RightPart>

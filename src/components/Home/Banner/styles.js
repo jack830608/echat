@@ -50,7 +50,7 @@ export const BannerButton = styled.div`
     transform: translateY(-1px);
     }
     @media only screen and (min-width:768px) {
-        padding:5px 35px;
+        padding:10px 35px;
         font-size:20px;
     }
 `;

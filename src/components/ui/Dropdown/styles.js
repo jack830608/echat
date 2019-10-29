@@ -9,7 +9,7 @@ export const Container = styled.div`
     box-sizing:border-box;
     position:relative;
     width:100%;
-    border-bottom:${props => props.focus ? '1px solid #ff6859' : '1px solid #ababab'};
+    border-bottom:${props => props.focus ? '1px solid #D14657' : '1px solid #ababab'};
     @media only screen and (min-width:768px) {
         width:${props => props.width ? props.width : 'auto'};
         margin:20px 0;

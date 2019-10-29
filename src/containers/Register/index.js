@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps, mapDispatchToProps } from '../../store';
-import FormComponent from '../../components/Form'
+import Register from '../../components/Register'
 
-class Form extends React.Component {
+class Register_C extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,10 +16,10 @@ class Form extends React.Component {
     render() {
         return (
             <div style={{ opacity: this.state.op, transition: '1s', overflow:'hidden' }}>
-                <FormComponent/>
+                <Register/>
             </div>
         );
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Form);
+export default connect(mapStateToProps, mapDispatchToProps)(Register_C);

@@ -4,7 +4,7 @@ import Router from "next/router";
 
 class NProgressContainer extends React.Component {
     static defaultProps = {
-        color: "#ff6859",
+        color: "#D14657",
         showAfterMs: 0,
         spinner: false
     };

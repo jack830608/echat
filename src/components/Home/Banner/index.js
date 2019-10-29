@@ -18,7 +18,7 @@ export default class extends React.Component {
             <Container>
                     <Title>限時聊天室</Title>
                     <SubTitle>限時且私密</SubTitle>
-                    <Link href="/start">
+                    <Link href="/register">
                         <BannerButton>
                             免費註冊
                         </BannerButton>
