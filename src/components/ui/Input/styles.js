@@ -19,6 +19,7 @@ export const In = styled.input`
     transition:175ms ease-out;
     box-sizing:border-box;
     width:100%;
+    border-radius: 5px;
     :focus {
         outline: none;
     }
@@ -31,21 +32,23 @@ export const In = styled.input`
 `;
 export const Text = styled.textarea`
     border:none;
-    background:#FFF;
-    padding:0.5em;
+    background:#EDEDED;
+    padding:0.7em;
     font-size: 16px !important;
     transition:175ms ease-out;
     width:100%;
     resize: none;
     box-sizing:border-box;
+    border-radius: 5px;
+    height:5em;
     :focus {
         outline: none;
     }
     ::placeholder{
-        color: #BABABA;
+        color: #B0B0B0;
     }
     @media only screen and (min-width:768px) {
-        padding:0.7em;
+        font-size: 20px !important;
     }
 `;
 export const Dot = styled.div`

@@ -7,6 +7,8 @@ import {
   Frame,
   DotContainer,
   Dot,
+  Arrow,
+  ArrowBox,
 } from './styles';
 
 
@@ -312,9 +314,17 @@ export default class Carousel extends React.Component {
               {React.cloneElement(this.props.children[0])}
             </Frame>
           </SlidersContainer>
-          {/* <DotContainer>
+          <DotContainer>
             {this.renderDot()}
-          </DotContainer> */}
+          </DotContainer>
+          <ArrowBox>
+          <Arrow onClick={(e) => this.onLeftButtonClick(e)}>
+            〈
+          </Arrow>
+          <Arrow onClick={(e) => this.onRightButtonClick(e)}>
+              〉
+          </Arrow>
+          </ArrowBox>
         </SliderWrapper>
       </Container>
     );

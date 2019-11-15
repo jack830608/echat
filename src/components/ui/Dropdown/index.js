@@ -39,7 +39,7 @@ export default class extends React.Component {
                 <Arrow
                     width={'15px'}
                     fill={'#B5B5B5'}
-                    top={'10%'}
+                    top={'20%'}
                     right={'5%'}
                 />
             </Container>
