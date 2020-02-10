@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const server = express();
 const routes = require('./routes');
 const morgan = require('morgan');
-// const database = require('../lib/database');
+const database = require('../lib/database');
 const next = require('next');
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev , dir: './src' });
@@ -12,7 +12,7 @@ const handle = app.getRequestHandler();
 
 app.prepare()
 	.then(() => {
-		// database.connect()
+		database.connect()
 		server.use(morgan('dev'))
 		server.use(express.static(path.resolve(__dirname, '../static')));
 		server.use(bodyParser.urlencoded({

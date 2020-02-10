@@ -6,12 +6,14 @@ let schema = new Schema({
     name: { 
         type: String 
     },
-    mail: { 
+    email: { 
         type: String 
     },
-    leader: {
-        type: Boolean,
-        default: false
+    web: {
+        type: String
+    },
+    mobile: {
+        type: String
     }
 }).plugin(plugin)
 

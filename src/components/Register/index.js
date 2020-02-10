@@ -1,14 +1,16 @@
 import {
     Container, Title, SmallTitle, Form, SubTitle, Button, CheckBox,
     Step, SelectDate, SelectBox, TimeBox, Info, StepImg, Img, ImgInfo,
+    UrlBox, Url
 } from './styles';
-import Input from '../ui/Input'
-import Carousel from '../ui/Carousel'
-import Dropdown from '../ui/Dropdown'
-import axios from 'axios'
-import Link from 'next/link'
-import Router from 'next/router'
-import { validateEmail } from '../../lib/check'
+import Input from '../ui/Input';
+import Carousel from '../ui/Carousel';
+import Dropdown from '../ui/Dropdown';
+import axios from 'axios';
+import Link from 'next/link';
+import Router from 'next/router';
+import { validateEmail } from '../../lib/check';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 export default class extends React.Component {
     constructor(props) {
         super(props);
@@ -25,8 +27,9 @@ export default class extends React.Component {
             price: '',
             info: '',
             date: [],
-            step: 3,
+            step: 1,
             privacy: false,
+            eventId: '',
         };
     }
     componentDidMount() {
@@ -70,8 +73,8 @@ export default class extends React.Component {
         return email.length > 0 && re.test(email);
     };
     handleSubmit = async () => {
-        const { step, name, email, mobile, privacy, event,
-            date, startTime, endTime, price } = this.state
+        const { step, name, email, web, mobile, privacy, event,
+            date, startTime, endTime, price, info } = this.state
         if (step === 1) {
             if (!name) {
                 return this.setState({ alert: '* 姓名為必填欄位' });
@@ -97,21 +100,25 @@ export default class extends React.Component {
             this.setState({ step: 3 })
         } else {
             const data = {
+                name,
+                email,
+                web,
+                mobile,
                 event,
-                location,
-                remark,
-                startDate,
-                endDate,
+                date,
                 startTime,
                 endTime,
-                name,
-                mail,
+                price,
+                info,
             }
-            axios.post('/event', data)
+            axios.post('/register', data)
                 .then((res) => {
-                    Router.push({
-                        pathname: `/share/${res.data.id}`,
-                    })
+                    if (res.data) {
+                        this.setState({
+                            eventId: res.data,
+                            step: 4
+                        })
+                    }
                 })
                 .catch((error) => {
                     console.log(error);
@@ -266,9 +273,29 @@ export default class extends React.Component {
                     <StepImg>
                         <Img src="/images/step3.png" />
                         <ImgInfo>聊天結束，款項結算*</ImgInfo>
-                        <ImgInfo style={{fontSize: '10px'}}>可收取款項累積滿1000元可申請</ImgInfo>
+                        <ImgInfo style={{ fontSize: '10px' }}>可收取款項累積滿1000元可申請</ImgInfo>
                     </StepImg>
                 </Carousel>
+            </Step>
+        )
+        const step4 = (
+            <Step>
+                <CopyToClipboard
+                    text={`https://echat.store/${this.state.eventId}`}
+                    onCopy={() => alert('複製成功！')}
+                >
+                    <UrlBox>
+                        {`https://echat.store/${this.state.eventId}`}
+                    </UrlBox>
+                </CopyToClipboard>
+                <Info style={{ color: '#A1A1A1' }}>
+                    管理後台
+                </Info>
+                <Link href={`/dashboard/${this.state.eventId}`}>
+                    <Url>
+                        {`https://echat.store/dashboard/${this.state.eventId}`}
+                    </Url>
+                </Link>
             </Step>
         )
         return (
@@ -279,20 +306,23 @@ export default class extends React.Component {
                     {this.state.step === 1 && <Info alert={this.state.alert ? true : false}>{this.state.alert ? this.state.alert : ''}</Info>}
                     {this.state.step === 1 && step1}
 
-
                     {this.state.step === 2 && <SubTitle>創建服務(2 / 3)</SubTitle>}
                     {this.state.step === 2 && <Info alert={this.state.alert ? true : false}>{this.state.alert ? this.state.alert : '固定一個小時，收10趴服務費'}</Info>}
                     {this.state.step === 2 && step2}
 
-
                     {this.state.step === 3 && <SubTitle>跟錢有關(3 / 3)</SubTitle>}
                     {this.state.step === 3 && <Info alert={this.state.alert ? true : false}>{this.state.alert ? this.state.alert : '服務沒有很複雜，但很實用'}</Info>}
                     {this.state.step === 3 && step3}
-                    <Button
+
+                    {this.state.step === 4 && <SubTitle>開始斂財</SubTitle>}
+                    {this.state.step === 4 && <Info alert={this.state.alert ? true : false}>{this.state.alert ? this.state.alert : '下面是你的服務預約連結'}</Info>}
+                    {this.state.step === 4 && step4}
+
+                    {this.state.step !== 4 && <Button
                         onClick={this.handleSubmit}
                     >
                         {this.state.step === 3 ? '取得連結' : '下一步'}
-                    </Button>
+                    </Button>}
                 </Form>
             </Container>
         );

@@ -8,61 +8,44 @@ const QRCode = require('qrcode');
 
 
 module.exports = (server, handle, app) => {
-	server.get('/share/:id', wrap(async (req, res) => {
-		const actualPage = '/share';
-		let check = await mongoose.Types.ObjectId.isValid(req.params.id);
-		let event = check ? await Event.findById(req.params.id) : null;
-		queryParams = {
-			id: req.params.id,
-			event,
-		};
-		app.render(req, res, actualPage, queryParams);
-	}));
+	// server.get('/share/:id', wrap(async (req, res) => {
+	// 	const actualPage = '/share';
+	// 	let check = await mongoose.Types.ObjectId.isValid(req.params.id);
+	// 	let event = check ? await Event.findById(req.params.id) : null;
+	// 	queryParams = {
+	// 		id: req.params.id,
+	// 		event,
+	// 	};
+	// 	app.render(req, res, actualPage, queryParams);
+	// }));
 
-	server.post('/event', wrap(async (req, res) => {
+	server.post('/register', wrap(async (req, res) => {
 		let data = req.body;
-		let leader = await User.create({
+		let client = await User.create({
 			name: data.name,
-			mail: data.mail,
-			leader: true,
+			email: data.email,
+			web: data.web,
+			mobile: data.mobile
 		});
-		let randomString = () => {
-			let code = crypto.randomBytes(64).toString('hex').substr(0, 5);
-			let repeat = Event.find({ code });
-			if (repeat && repeat.length > 0) {
-				return randomString()
-			} else {
-				return code
-			}
-		}
+		// let randomString = () => {
+		// 	let code = crypto.randomBytes(64).toString('hex').substr(0, 5);
+		// 	let repeat = Event.find({ code });
+		// 	if (repeat && repeat.length > 0) {
+		// 		return randomString()
+		// 	} else {
+		// 		return code
+		// 	}
+		// }
 		let result = await Event.create({
+			owner: client.id,
 			name: data.event,
-			location: data.location,
-			remark: data.remark,
-			startDate: data.startDate,
-			endDate: data.endDate,
+			price: data.price,
+			info: data.info,
+			date: data.date,
 			startTime: data.startTime,
 			endTime: data.endTime,
-			attendance: leader.id,
-			code: randomString(),
 		});
-		QRCode.toDataURL(`https://jojo.cool/friend/${result.id}`, (err, qr) => {
-			if (err) throw err;
-			Event.findOneAndUpdate(
-				{ _id: result.id },
-				{ qrcode: qr },
-				{ new: true },
-				(err , newResult) => {
-					if (err) {
-						throw err
-					}
-					else {
-						sendMail(newResult, leader)
-						res.send(newResult)
-					}
-				}
-			);
-		});
+		res.send(result.id)
 	}));
 
 	// server.get('/search_result/:id', wrap(async (req, res) => {

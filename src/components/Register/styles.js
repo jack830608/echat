@@ -1,4 +1,4 @@
-import styled ,{keyframes}from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
     background:#154071;
@@ -28,7 +28,7 @@ export const SubTitle = styled.div`
     }
 `;
 export const Info = styled.div`
-    color:${props => props.alert  ? '#D14657' : '#A1A1A1'};
+    color:${props => props.alert ? '#D14657' : '#A1A1A1'};
     font-size:16px;
     text-align:center;
     height:24px;
@@ -131,9 +131,9 @@ export const SelectBox = styled.div`
 `;
 
 export const SelectDate = styled.div`
-    background:${props => props.selected  ? '#154071' : ''};
-    border: ${props => props.selected  ? '2px solid #154071' : '2px solid #D4D4D4'};
-    color: ${props => props.selected  ? '#FFF' : '#D4D4D4'};
+    background:${props => props.selected ? '#154071' : ''};
+    border: ${props => props.selected ? '2px solid #154071' : '2px solid #D4D4D4'};
+    color: ${props => props.selected ? '#FFF' : '#D4D4D4'};
     width:30px;
     height:30px;
     border-radius:50%;
@@ -176,3 +176,27 @@ export const ImgInfo = styled.div`
 
     }
 `;
+export const UrlBox = styled.div`
+    font-size:16px;
+    color:#A1A1A1;
+    background:#EDEDED;
+    padding: 10px;
+    border-radius:5px;
+    text-align:center;
+    margin:70px 0 100px 0;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    @media only screen and (min-width:768px) {
+        margin:90px 0 120px 0;
+    }
+`;
+export const Url = styled.div`
+    color:#154071;
+    font-weight:700;
+    text-align:center;
+    cursor:pointer;
+    margin-bottom:10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+`
