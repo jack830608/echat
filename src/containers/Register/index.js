@@ -1,25 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { mapStateToProps, mapDispatchToProps } from '../../store';
+import React, { useState, useEffect } from 'react';
 import Register from '../../components/Register'
 
-class Register_C extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            op: 0,
-        };
-    }
-    componentDidMount() {
-        this.setState({ op: 1 });
-    }
-    render() {
-        return (
-            <div style={{ opacity: this.state.op, transition: '1s', overflow:'hidden' }}>
-                <Register/>
-            </div>
-        );
-    }
-}
+export default () => {
+    const [op, setOp] = useState(0)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Register_C);
+    useEffect(() => {
+        setOp(1)
+    }, [])
+    return (
+        <div style={{ opacity: op, transition: '1s', overflow: 'hidden' }}>
+            <Register />
+        </div>
+    )
+}

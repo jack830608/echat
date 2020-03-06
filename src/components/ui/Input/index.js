@@ -1,62 +1,53 @@
-import {
-    Container, In, Text, Dot,
-} from './styles';
-import { relative } from 'path';
+import React, { useState, useEffect } from 'react';
+import { Container, In, Text, Dot } from './styles';
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            focus: false,
-        };
+export default (props) => {
+    const [focus, setFocus] = useState(false)
+    const focusAction = () => {
+        inputElm.focus();
     }
-    focus = () => {
-        this.inputElm.focus();
-    }
-    inputElm;
-    render() {
-        return (
-            <Container
-                onClick={this.props.onClick}
-                width={this.props.width}
-                type={this.props.type}
-                focus={this.state.focus}
-            >
-                {this.props.type === 'input' &&
-                    <label style={{ position: 'relative' }}>
-                        <In
-                            onFocus={() => { this.setState({ focus: true }) }}
-                            onBlur={
-                                () => {
-                                    this.setState({ focus: false });
-                                    if (this.props.onBlur) {
-                                        this.props.onBlur();
-                                    }
-                                }}
-                            placeholder={this.props.placeholder}
-                            readOnly={this.props.readonly}
-                            value={this.props.value}
-                            onChange={this.props.onChange}
-                            ref={(ref) => this.inputElm = ref}
-                        />
-                        {this.props.required && <Dot />}
-                    </label>}
-                {this.props.type === 'text' &&
-                    <Text
-                        onFocus={() => this.setState({ focus: true })}
+    const inputElm = React.createRef();
+    return (
+        <Container
+            onClick={props.onClick}
+            width={props.width}
+            type={props.type}
+            focus={focus}
+        >
+            {props.type === 'input' &&
+                <label style={{ position: 'relative' }}>
+                    <In
+                        onFocus={() => { setFocus(true) }}
                         onBlur={
                             () => {
-                                this.setState({ focus: false });
-                                if (this.props.onBlur) {
-                                    this.props.onBlur();
+                                setFocus(false);
+                                if (props.onBlur) {
+                                    props.onBlur();
                                 }
                             }}
-                        placeholder={this.props.placeholder}
-                        onChange={this.props.onChange}
-                        ref={(ref) => this.inputElm = ref}
+                        placeholder={props.placeholder}
+                        readOnly={props.readonly}
+                        value={props.value}
+                        onChange={props.onChange}
+                        ref={inputElm}
                     />
-                }
-            </Container>
-        );
-    }
+                    {props.required && <Dot />}
+                </label>}
+            {props.type === 'text' &&
+                <Text
+                    onFocus={() => setFocus(true)}
+                    onBlur={
+                        () => {
+                            setFocus(false)
+                            if (props.onBlur) {
+                                props.onBlur();
+                            }
+                        }}
+                    placeholder={props.placeholder}
+                    onChange={props.onChange}
+                    ref={inputElm}
+                />
+            }
+        </Container>
+    );
 }

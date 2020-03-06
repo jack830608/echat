@@ -8,16 +8,16 @@ const QRCode = require('qrcode');
 
 
 module.exports = (server, handle, app) => {
-	// server.get('/share/:id', wrap(async (req, res) => {
-	// 	const actualPage = '/share';
-	// 	let check = await mongoose.Types.ObjectId.isValid(req.params.id);
-	// 	let event = check ? await Event.findById(req.params.id) : null;
-	// 	queryParams = {
-	// 		id: req.params.id,
-	// 		event,
-	// 	};
-	// 	app.render(req, res, actualPage, queryParams);
-	// }));
+	server.get('/dashboard/:id', wrap(async (req, res) => {
+		const actualPage = '/dashboard';
+		let check = await mongoose.Types.ObjectId.isValid(req.params.id);
+		let event = check ? await Event.findById(req.params.id) : null;
+		queryParams = {
+			id: req.params.id,
+			event,
+		};
+		app.render(req, res, actualPage, queryParams);
+	}));
 
 	server.post('/register', wrap(async (req, res) => {
 		let data = req.body;
@@ -27,15 +27,6 @@ module.exports = (server, handle, app) => {
 			web: data.web,
 			mobile: data.mobile
 		});
-		// let randomString = () => {
-		// 	let code = crypto.randomBytes(64).toString('hex').substr(0, 5);
-		// 	let repeat = Event.find({ code });
-		// 	if (repeat && repeat.length > 0) {
-		// 		return randomString()
-		// 	} else {
-		// 		return code
-		// 	}
-		// }
 		let result = await Event.create({
 			owner: client.id,
 			name: data.event,

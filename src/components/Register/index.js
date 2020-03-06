@@ -8,7 +8,6 @@ import Carousel from '../ui/Carousel';
 import Dropdown from '../ui/Dropdown';
 import axios from 'axios';
 import Link from 'next/link';
-import Router from 'next/router';
 import { validateEmail } from '../../lib/check';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 export default class extends React.Component {
@@ -17,8 +16,8 @@ export default class extends React.Component {
         this.state = {
             time: [],
             alert: false,
-            ShowStart: false,
-            ShowEnd: false,
+            showStart: false,
+            showEnd: false,
             name: '',
             email: '',
             web: '',
@@ -27,6 +26,8 @@ export default class extends React.Component {
             price: '',
             info: '',
             date: [],
+            startTime: '',
+            endTime: '',
             step: 1,
             privacy: false,
             eventId: '',
@@ -299,7 +300,7 @@ export default class extends React.Component {
             </Step>
         )
         return (
-            <Container onClick={() => this.setState({ ShowStart: false, ShowEnd: false })}>
+            <Container onClick={() => this.setState({ showStart: false, showEnd: false })}>
                 <Title>限時且私密</Title>
                 <Form>
                     {this.state.step === 1 && <SubTitle>蒐集個資(1 / 3)</SubTitle>}

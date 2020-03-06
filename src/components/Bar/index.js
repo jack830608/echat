@@ -1,44 +1,32 @@
-import {
-    Container, Button, RightPart, Img,
-} from './styles';
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import { Container, Button, RightPart, Img } from './styles';
 import Link from 'next/link'
 
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            trackId: '',
-            scroll: false,
-            Mounted: false,
-            result: '',
-        };
-    }
-    componentDidMount() {
+export default () => {
+    const [scroll, setScroll] = useState(false)
+
+    useEffect(() => {
         window.addEventListener('scroll',
             () => {
-                if ((window.pageYOffset + 64) >= window.innerHeight && this.props.change) {
-                    this.setState({ scroll: true })
+                if ((window.pageYOffset + 64) >= window.innerHeight) {
+                    setScroll(true)
                 } else {
-                    this.setState({ scroll: false })
+                    setScroll(false)
                 }
             }
         );
-        this.setState({ Mounted: true });
-    }
-    render() {
-        return (
-            <Container id='bar_container' scroll={this.state.scroll}>
-                {this.state.Mounted &&
-                    <Link href="/">
-                        <Img src={`${window.location.origin}/images/logo.png`} />
-                    </Link>}
-                <RightPart>
-                    <Link href="/register">
-                        <Button>免費註冊</Button>
-                    </Link>
-                </RightPart>
-            </Container>
-        );
-    }
+    }, [])
+
+    return (
+        <Container id='bar_container' scroll={scroll}>
+            <Link href="/">
+                <Img src="/images/logo.png" />
+            </Link>
+            <RightPart>
+                <Link href="/register">
+                    <Button>免費註冊</Button>
+                </Link>
+            </RightPart>
+        </Container>
+    );
 }

@@ -1,40 +1,33 @@
-import {
-    Container, Drop
-} from './styles';
+import React, { useState, useEffect } from 'react';
+import { Container, Drop } from './styles';
 import Arrow from '../../ui/svg/DownArrow'
-export default class extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            focus: false,
-            change: false,
-        };
-    }
-    handelChange(e){
-        if(e.target.value >= 0){
-            this.setState({change:true})
+export default (props) => {
+    const [focus, setFocus] = useState(false)
+    const [change, setChange] = useState(false)
+    const handelChange = (e) => {
+        if (e.target.value >= 0) {
+            setChange('true')
         }
     }
-    render() {
         return (
 
             <Container
-                width={this.props.width}
-                focus={this.state.focus}
+                width={props.width}
+                focus={focus}
             >
                 <Drop
-                    onFocus={() => this.setState({ focus: true })}
-                    onBlur={() => this.setState({ focus: false })}
-                    onChange={(e) =>{
-                        this.props.onChange(e);
-                        this.handelChange(e)
+                    onFocus={() => setFocus(true)}
+                    onBlur={() => setFocus(false)}
+                    onChange={(e) => {
+                        props.onChange(e);
+                        handelChange(e)
                     }}
-                    focus={this.state.focus}
-                    placeholder={this.props.placeholder}
-                    change={this.state.change}
-                    id={this.props.id}
+                    focus={focus}
+                    placeholder={props.placeholder}
+                    change={change}
+                    id={props.id}
                 >
-                    {this.props.children}
+                    {props.children}
                 </Drop>
                 <Arrow
                     width={'15px'}
@@ -44,5 +37,4 @@ export default class extends React.Component {
                 />
             </Container>
         );
-    }
 }
