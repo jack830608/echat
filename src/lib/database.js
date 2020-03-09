@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const mongooseLeanId = require('mongoose-lean-id')
-
+mongoose.set('useFindAndModify', false);
 mongoose.Promise = Promise
 
 module.exports.plugin = (schema) => {

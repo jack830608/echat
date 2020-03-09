@@ -13,18 +13,18 @@ export const Container = styled.div`
 
 export const Title = styled.div`
     color:#FFF;
-    font-size:26px;
+    font-size:24px;
     @media only screen and (min-width:768px) {
-        font-size:36px;
+        font-size:34px;
     }
 `;
 export const SubTitle = styled.div`
     color:#154071;
-    font-size:26px;
+    font-size:24px;
     text-align:center;
     margin-bottom:10px;
     @media only screen and (min-width:768px) {
-        font-size:36px;
+        font-size:34px;
     }
 `;
 export const Info = styled.div`
@@ -62,9 +62,6 @@ export const Form = styled.div`
     @media only screen and (min-width:768px) {
         padding:20px;
         width:500px;
-        /* ::-webkit-scrollbar { 
-        display: none;
-        } */
     }
 `;
 export const Button = styled.div`

@@ -1,9 +1,9 @@
 import { withRouter } from 'next/router';
-import Register from '../containers/Register'
+import Dashboard from '../containers/Dashboard'
 
 
 export default withRouter((props) => (
-    <Register
+    <Dashboard
         data={props.router.query}
     />
 ));

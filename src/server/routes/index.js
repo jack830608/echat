@@ -9,25 +9,31 @@ const QRCode = require('qrcode');
 
 module.exports = (server, handle, app) => {
 	server.get('/dashboard/:id', wrap(async (req, res) => {
-		const actualPage = '/dashboard';
-		let check = await mongoose.Types.ObjectId.isValid(req.params.id);
-		let event = check ? await Event.findById(req.params.id) : null;
-		queryParams = {
-			id: req.params.id,
-			event,
-		};
-		app.render(req, res, actualPage, queryParams);
+		const check = await mongoose.Types.ObjectId.isValid(req.params.id);
+		if (check) {
+			const actualPage = '/dashboard';
+			const user = await User.findById(req.params.id);
+			const event = await Event.find({ owner: req.params.id })
+			const data = {
+				user,
+				event
+			}
+			app.render(req, res, actualPage, data);
+		} else {
+			res.redirect('/');
+		}
+
 	}));
 
 	server.post('/register', wrap(async (req, res) => {
-		let data = req.body;
-		let client = await User.create({
+		const data = req.body;
+		const client = await User.create({
 			name: data.name,
 			email: data.email,
 			web: data.web,
 			mobile: data.mobile
 		});
-		let result = await Event.create({
+		const result = await Event.create({
 			owner: client.id,
 			name: data.event,
 			price: data.price,
@@ -36,9 +42,16 @@ module.exports = (server, handle, app) => {
 			startTime: data.startTime,
 			endTime: data.endTime,
 		});
-		res.send(result.id)
+		res.send(client.id)
 	}));
-
+	server.post('/update', wrap(async (req, res) => {
+		console.log(req.body)
+		const result = await User.findOneAndUpdate(
+			{ _id: req.body.id },
+			{ email: req.body.email, mobile: req.body.mobile }
+		)
+		res.send(result)
+	}))
 	// server.get('/search_result/:id', wrap(async (req, res) => {
 	// 	const actualPage = '/search_result';
 	// 	let check = req.params.id;
