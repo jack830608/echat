@@ -39,9 +39,11 @@ export const Info = styled.div`
 `;
 export const SmallTitle = styled.div`
     color:#154071;
-    font-size:16px;
-    margin-bottom:10px;
+    font-size:14px;
+    margin-bottom:5px;
     @media only screen and (min-width:768px) {
+        font-size:16px;
+        margin-bottom:10px;
     }
 `;
 export const Form = styled.div`

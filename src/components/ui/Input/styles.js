@@ -14,7 +14,7 @@ export const Container = styled.div`
 export const In = styled.input`
     border:none;
     background:#EDEDED;
-    padding:1em 0.7em;
+    padding:0.7em;
     font-size: 16px !important;
     transition:175ms ease-out;
     box-sizing:border-box;
@@ -28,6 +28,7 @@ export const In = styled.input`
     }
     @media only screen and (min-width:768px) {
         font-size: 20px !important;
+        padding:1em 0.7em;
     }
 `;
 export const Text = styled.textarea`

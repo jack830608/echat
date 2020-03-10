@@ -24,8 +24,9 @@ export const Drop = styled.select`
     color:${props => props.change ? '#000' : '#B5B5B5'};
     -moz-appearance: none;
     -webkit-appearance: none;
-    padding:0.9em 0.7em;
-    height:50px;
+    padding:0.7em;
+    height:45px;
+    border-radius:5px;
     :focus {
         outline: none;
     }

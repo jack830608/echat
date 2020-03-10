@@ -44,11 +44,25 @@ module.exports = (server, handle, app) => {
 		});
 		res.send(client.id)
 	}));
-	server.post('/update', wrap(async (req, res) => {
+	server.post('/update/user', wrap(async (req, res) => {
 		console.log(req.body)
 		const result = await User.findOneAndUpdate(
 			{ _id: req.body.id },
 			{ email: req.body.email, mobile: req.body.mobile }
+		)
+		res.send(result)
+	}))
+	server.post('/update/event', wrap(async (req, res) => {
+		console.log(req.body)
+		const result = await Event.findOneAndUpdate(
+			{ _id: req.body.id },
+			{	name: req.body.name,
+				date: req.body.date,
+				startTime: req.body.startTime,
+				endTime: req.body.endTime,
+				price: req.body.price,
+				info: req.body.info,
+			}
 		)
 		res.send(result)
 	}))

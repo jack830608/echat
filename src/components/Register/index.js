@@ -57,10 +57,10 @@ export default class extends React.Component {
     }
     handleInput = (e, type) => {
         if (type === 'startTime' && this.state.endTime && Number(e.target.value) > Number(this.state.endTime)) {
-            document.getElementById("startTime").selectedIndex = 0
+            e.target.selectedIndex = 0
             this.setState({ alert: '* 開始時間不可大於結束時間', startTime: '' })
         } else if (type === 'endTime' && this.state.startTime && Number(e.target.value) < Number(this.state.startTime)) {
-            document.getElementById("endTime").selectedIndex = 0
+            e.target.selectedIndex = 0
             this.setState({ alert: '* 結束時間不可小於開始時間', endTime: '' })
         } else {
             this.setState({ [type]: e.target.value, alert: false })
@@ -229,7 +229,6 @@ export default class extends React.Component {
                         <Dropdown
                             width={'49%'}
                             onChange={(e) => this.handleInput(e, 'startTime')}
-                            id={'startTime'}
                         >
                             <option selected disabled>開始時間</option>
                             {this.state.time}
@@ -237,7 +236,6 @@ export default class extends React.Component {
                         <Dropdown
                             width={'49%'}
                             onChange={(e) => this.handleInput(e, 'endTime')}
-                            id={'endTime'}
                         >
                             <option selected disabled>結束時間</option>
                             {this.state.time}

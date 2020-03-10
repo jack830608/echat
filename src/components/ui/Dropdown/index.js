@@ -25,7 +25,6 @@ export default (props) => {
                     focus={focus}
                     placeholder={props.placeholder}
                     change={change}
-                    id={props.id}
                 >
                     {props.children}
                 </Drop>
